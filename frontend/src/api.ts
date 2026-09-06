@@ -1,4 +1,6 @@
-const API = '';
+/** Base URL for the API. Relative in Docker/local dev (proxied), absolute when
+ *  VITE_API_URL is set (e.g. Render static hosting). */
+const API = (import.meta.env.VITE_API_URL as string | undefined)?.replace(/\/$/, '') ?? '';
 
 export interface FeedItem {
   id: number;

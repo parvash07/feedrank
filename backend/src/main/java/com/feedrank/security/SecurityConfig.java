@@ -1,5 +1,6 @@
 package com.feedrank.security;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,8 +16,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class SecurityConfig {
   private final JwtAuthFilter jwtAuthFilter;
+  private final String[] allowedOrigins;
 
-  public SecurityConfig(JwtAuthFilter jwtAuthFilter) { this.jwtAuthFilter = jwtAuthFilter; }
+  public SecurityConfig(JwtAuthFilter jwtAuthFilter,
+      @Value("${app.cors.allowed-origins}") String allowedOrigins) {
+    this.jwtAuthFilter = jwtAuthFilter;
+    this.allowedOrigins = allowedOrigins.split(",");
+  }
 
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -24,7 +30,7 @@ public class SecurityConfig {
       .csrf(AbstractHttpConfigurer::disable)
       .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
       .authorizeHttpRequests(a -> a
-        .requestMatchers("/api/auth/**", "/actuator/health", "/error").permitAll()
+        .requestMatchers("/api/auth/**", "/api/health", "/actuator/health", "/error").permitAll()
         .anyRequest().authenticated())
       .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
     return http.build();
@@ -39,7 +45,7 @@ public class SecurityConfig {
       @Override
       public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**")
-            .allowedOrigins("http://localhost:5173", "http://localhost:3000")
+            .allowedOrigins(allowedOrigins)
             .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
             .allowedHeaders("*")
             .allowCredentials(false);
