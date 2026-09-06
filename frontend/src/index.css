@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+.dark {
+  color-scheme: dark;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  @apply bg-[#f5f5f7] text-[#1d1d1f] dark:bg-black dark:text-[#f5f5f7];
+  font-feature-settings: 'ss01', 'cv11';
+}
+
+::selection {
+  background: rgba(0, 113, 227, 0.2);
+}
+
+/* Thin, quiet scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(120, 120, 128, 0.4) transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background: rgba(120, 120, 128, 0.4);
+  border-radius: 8px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Frosted navigation bar */
+.apple-nav {
+  @apply sticky top-0 z-20 border-b border-black/[0.08] bg-[#fbfbfd]/70 backdrop-blur-xl backdrop-saturate-150 dark:border-white/[0.12] dark:bg-black/60;
+}
+
+/* Cards */
+.apple-card {
+  @apply rounded-[20px] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.12)] ring-1 ring-black/[0.04] transition-all duration-300 dark:bg-[#1c1c1e]/85 dark:shadow-[0_8px_32px_-12px_rgba(0,0,0,0.7)] dark:ring-white/[0.08];
+}
+
+.apple-card-hover {
+  @apply hover:-translate-y-[2px] hover:shadow-[0_2px_4px_rgba(0,0,0,0.05),0_16px_40px_-16px_rgba(0,0,0,0.2)] dark:hover:shadow-[0_16px_48px_-16px_rgba(0,0,0,0.8)];
+}
+
+/* Buttons */
+.apple-btn-primary {
+  @apply rounded-full bg-[#0071e3] px-5 py-2 text-[15px] font-medium text-white transition hover:bg-[#0077ed] active:scale-[0.98];
+}
+
+.apple-btn-quiet {
+  @apply rounded-full bg-black/[0.05] px-4 py-1.5 text-[14px] font-medium text-[#1d1d1f] transition hover:bg-black/[0.09] active:scale-[0.98] dark:bg-white/[0.12] dark:text-white dark:hover:bg-white/[0.18];
+}
+
+/* Segmented control */
+.apple-segment {
+  @apply flex items-center rounded-full bg-black/[0.06] p-[3px] text-[13px] font-medium dark:bg-white/[0.12];
+}
+.apple-segment button {
+  @apply rounded-full px-3.5 py-1 text-[#6e6e73] transition dark:text-white/60;
+}
+.apple-segment button[data-active='true'] {
+  @apply bg-white text-[#1d1d1f] shadow-sm dark:bg-white/[0.22] dark:text-white;
+}
+
+/* Pills */
+.apple-pill {
+  @apply rounded-full bg-black/[0.05] px-2.5 py-[3px] text-[12px] font-medium text-[#515154] dark:bg-white/[0.1] dark:text-white/70;
+}
+
+/* Inputs */
+.apple-input {
+  @apply w-full rounded-xl border-0 bg-black/[0.05] px-4 py-3 text-[15px] outline-none ring-1 ring-transparent transition placeholder:text-[#86868b] focus:bg-white focus:ring-[#0071e3] dark:bg-white/[0.1] dark:focus:bg-white/[0.14] dark:focus:ring-[#0a84ff];
+}
+
+/* Tighter segmented control + nav on very narrow phones */
+@media (max-width: 400px) {
+  .apple-segment button {
+    padding-left: 0.65rem;
+    padding-right: 0.65rem;
+  }
+}
+
+/* Fade-up entrance */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.rise {
+  animation: rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.rise-stagger > * {
+  animation: rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.rise-stagger > *:nth-child(1) { animation-delay: 0.02s; }
+.rise-stagger > *:nth-child(2) { animation-delay: 0.06s; }
+.rise-stagger > *:nth-child(3) { animation-delay: 0.1s; }
+.rise-stagger > *:nth-child(4) { animation-delay: 0.14s; }
+.rise-stagger > *:nth-child(5) { animation-delay: 0.18s; }
+.rise-stagger > *:nth-child(n + 6) { animation-delay: 0.22s; }

@@ -1,0 +1,18 @@
+# Dependencies & build output
+node_modules/
+frontend/dist/
+backend/target/
+
+# Env secrets (keep .env.example)
+.env
+!.env.example
+
+# IDE & OS
+.idea/
+.vscode/
+*.iml
+.DS_Store
+
+# Logs & temp
+*.log
+npm-debug.log*
