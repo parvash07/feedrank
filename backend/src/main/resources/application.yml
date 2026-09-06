@@ -1,10 +1,6 @@
 server:
   port: ${PORT:8080}
 
-app:
-  cors:
-    allowed-origins: ${APP_CORS_ORIGINS:http://localhost:5173,http://localhost:3000}
-
 spring:
   datasource:
     url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/feedrank}
@@ -26,6 +22,8 @@ spring:
       fail-on-unknown-properties: false
 
 app:
+  cors:
+    allowed-origins: ${APP_CORS_ORIGINS:http://localhost:5173,http://localhost:3000}
   jwt:
     secret: ${JWT_SECRET:dev-only-change-me-to-a-long-random-secret-at-least-32-bytes!!}
     expiration-ms: 86400000
