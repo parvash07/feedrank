@@ -32,8 +32,6 @@ model (MVP) → embedding preference vectors (upgrade) → epsilon-greedy explor
   badged in the UI; every impression logged with its reason
 - **"Why am I seeing this?"** — live debug view of your topic weights, interaction
   count, and embedding status
-- **Apple-inspired UI** — frosted-glass nav, SF-style typography, full light/dark mode
-  (OS-aware, persisted), responsive down to 390&nbsp;px
 - **Clean layered backend** — `controller → service → repository → entity`, request/response
   DTOs, MapStruct-style mappers, and centralized exception handling
 
