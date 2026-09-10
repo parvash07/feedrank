@@ -210,16 +210,3 @@ repositories; services never touch HTTP; the API never serializes entities.
 cd backend && mvn test          # TagExtractor, ranking math, cosine similarity, deltas
 cd frontend && npm run build    # tsc --noEmit + vite production build
 ```
-
-The UI has additionally been verified with headless-Chrome screenshots at 390 px
-(mobile, light + dark) and 1280 px (desktop): zero horizontal overflow, 30/30 cards
-rendered.
-
----
-
-## Roadmap
-
-- [ ] Thompson sampling per-topic wired into the live path (helper exists)
-- [ ] pgvector native similarity search (`<=>`) instead of in-Java cosine
-- [ ] Per-user epsilon that shrinks as confidence grows
-- [ ] "Not interested in this topic" bulk action from the debug view
